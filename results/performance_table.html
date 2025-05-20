@@ -1,0 +1,146 @@
+<html><head><style>table {border-collapse: collapse; width: 100%; margin-bottom: 20px;}th, td {text-align: center; padding: 8px; border: 1px solid #ddd;}th {background-color: #f2f2f2;}tr:nth-child(even) {background-color: #f9f9f9;}h3, h4 {color: #333;}</style></head><body><h3>Table 1: Performance Metrics (Baseline)</h3><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Accuracy</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1 Score</th>
+      <th>AUC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Fatigue Detection</th>
+      <td>0.8500</td>
+      <td>0.8200</td>
+      <td>0.8700</td>
+      <td>0.8400</td>
+      <td>0.9100</td>
+    </tr>
+    <tr>
+      <th>Frustration Detection</th>
+      <td>0.8000</td>
+      <td>0.7800</td>
+      <td>0.8200</td>
+      <td>0.8000</td>
+      <td>0.8800</td>
+    </tr>
+  </tbody>
+</table><h4>Ablation: without_blink_patterns</h4><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Accuracy</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1 Score</th>
+      <th>AUC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Fatigue Detection</th>
+      <td>0.8000</td>
+      <td>0.7800</td>
+      <td>0.8200</td>
+      <td>0.8000</td>
+      <td>0.8800</td>
+    </tr>
+    <tr>
+      <th>Frustration Detection</th>
+      <td>0.7800</td>
+      <td>0.7600</td>
+      <td>0.8000</td>
+      <td>0.7800</td>
+      <td>0.8500</td>
+    </tr>
+  </tbody>
+</table><h4>Ablation: without_eye_closure_patterns</h4><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Accuracy</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1 Score</th>
+      <th>AUC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Fatigue Detection</th>
+      <td>0.7500</td>
+      <td>0.7300</td>
+      <td>0.7700</td>
+      <td>0.7500</td>
+      <td>0.8300</td>
+    </tr>
+    <tr>
+      <th>Frustration Detection</th>
+      <td>0.7900</td>
+      <td>0.7700</td>
+      <td>0.8100</td>
+      <td>0.7900</td>
+      <td>0.8600</td>
+    </tr>
+  </tbody>
+</table><h4>Ablation: without_pupil_metrics</h4><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Accuracy</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1 Score</th>
+      <th>AUC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Fatigue Detection</th>
+      <td>0.8200</td>
+      <td>0.8000</td>
+      <td>0.8400</td>
+      <td>0.8200</td>
+      <td>0.8900</td>
+    </tr>
+    <tr>
+      <th>Frustration Detection</th>
+      <td>0.7500</td>
+      <td>0.7200</td>
+      <td>0.7600</td>
+      <td>0.7400</td>
+      <td>0.8200</td>
+    </tr>
+  </tbody>
+</table><h4>Ablation: without_gaze_patterns</h4><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Accuracy</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1 Score</th>
+      <th>AUC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Fatigue Detection</th>
+      <td>0.8300</td>
+      <td>0.8100</td>
+      <td>0.8600</td>
+      <td>0.8300</td>
+      <td>0.9000</td>
+    </tr>
+    <tr>
+      <th>Frustration Detection</th>
+      <td>0.7600</td>
+      <td>0.7300</td>
+      <td>0.7700</td>
+      <td>0.7500</td>
+      <td>0.8300</td>
+    </tr>
+  </tbody>
+</table></body></html>
