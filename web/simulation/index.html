@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive State Detection Simulation</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .chart-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+        .state-neutral {
+            color: #3498db;
+        }
+        .state-fatigue {
+            color: #f39c12;
+        }
+        .state-frustration {
+            color: #e74c3c;
+        }
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .metrics-table th,
+        .metrics-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .metrics-table th {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Adaptive IDE Interface - Cognitive State Response System</h1>
+        <p>This simulation demonstrates the performance of cognitive state detection models and the effectiveness of adaptive interface interventions.</p>
+        
+        <div class="grid">
+            <div class="chart-container">
+                <h2>Eye Metrics by Cognitive State</h2>
+                <canvas id="metricsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2>Feature Importance</h2>
+                <canvas id="featureImportanceChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="chart-container">
+                <h2>Classification Performance</h2>
+                <canvas id="classificationChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2>Intervention Effectiveness</h2>
+                <canvas id="interventionChart"></canvas>
+            </div>
+        </div>
+        
+        <h2>Cognitive State Detection Performance</h2>
+        <div class="grid">
+            <div class="card">
+                <h3 class="state-fatigue">Fatigue Detection</h3>
+                <div id="fatigueStats"></div>
+            </div>
+            <div class="card">
+                <h3 class="state-frustration">Frustration Detection</h3>
+                <div id="frustrationStats"></div>
+            </div>
+        </div>
+        
+        <h2>Detection Timing Performance</h2>
+        <div class="card">
+            <div id="timingStats"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { simulationData, stats, generateEyeMetrics, classificationResults, 
+                featureImportance, detectionTiming, interventionResults } 
+                from './cognitive_state_simulation.js';
+        
+        // Display stats in the DOM
+        function displayStats() {
+            document.getElementById('fatigueStats').innerHTML = `
+                <table class="metrics-table">
+                    <tr><th>Metric</th><th>Value</th></tr>
+                    <tr><td>AUC</td><td>${classificationResults.fatigue.auc.toFixed(2)}</td></tr>
+                    <tr><td>Accuracy</td><td>${classificationResults.fatigue.accuracy.toFixed(2)}</td></tr>
+                    <tr><td>Precision</td><td>${classificationResults.fatigue.precision.toFixed(2)}</td></tr>
+                    <tr><td>Recall</td><td>${classificationResults.fatigue.recall.toFixed(2)}</td></tr>
+                    <tr><td>F1 Score</td><td>${classificationResults.fatigue.f1Score.toFixed(2)}</td></tr>
+                </table>
+                <h4>Confusion Matrix</h4>
+                <table class="metrics-table">
+                    <tr><th></th><th>Predicted Negative</th><th>Predicted Positive</th></tr>
+                    <tr><td><b>Actual Negative</b></td><td>${classificationResults.fatigue.confusionMatrix.trueNegatives}</td><td>${classificationResults.fatigue.confusionMatrix.falsePositives}</td></tr>
+                    <tr><td><b>Actual Positive</b></td><td>${classificationResults.fatigue.confusionMatrix.falseNegatives}</td><td>${classificationResults.fatigue.confusionMatrix.truePositives}</td></tr>
+                </table>
+            `;
+            
+            document.getElementById('frustrationStats').innerHTML = `
+                <table class="metrics-table">
+                    <tr><th>Metric</th><th>Value</th></tr>
+                    <tr><td>AUC</td><td>${classificationResults.frustration.auc.toFixed(2)}</td></tr>
+                    <tr><td>Accuracy</td><td>${classificationResults.frustration.accuracy.toFixed(2)}</td></tr>
+                    <tr><td>Precision</td><td>${classificationResults.frustration.precision.toFixed(2)}</td></tr>
+                    <tr><td>Recall</td><td>${classificationResults.frustration.recall.toFixed(2)}</td></tr>
+                    <tr><td>F1 Score</td><td>${classificationResults.frustration.f1Score.toFixed(2)}</td></tr>
+                </table>
+                <h4>Confusion Matrix</h4>
+                <table class="metrics-table">
+                    <tr><th></th><th>Predicted Negative</th><th>Predicted Positive</th></tr>
+                    <tr><td><b>Actual Negative</b></td><td>${classificationResults.frustration.confusionMatrix.trueNegatives}</td><td>${classificationResults.frustration.confusionMatrix.falsePositives}</td></tr>
+                    <tr><td><b>Actual Positive</b></td><td>${classificationResults.frustration.confusionMatrix.falseNegatives}</td><td>${classificationResults.frustration.confusionMatrix.truePositives}</td></tr>
+                </table>
+            `;
+            
+            document.getElementById('timingStats').innerHTML = `
+                <table class="metrics-table">
+                    <tr><th>Metric</th><th>Fatigue (seconds)</th><th>Frustration (seconds)</th></tr>
+                    <tr><td>Average Detection Time</td><td>${detectionTiming.fatigue.averageDetectionTime.toFixed(1)}</td><td>${detectionTiming.frustration.averageDetectionTime.toFixed(1)}</td></tr>
+                    <tr><td>Standard Deviation</td><td>${detectionTiming.fatigue.stdDetectionTime.toFixed(1)}</td><td>${detectionTiming.frustration.stdDetectionTime.toFixed(1)}</td></tr>
+                    <tr><td>Minimum Time</td><td>${detectionTiming.fatigue.minDetectionTime.toFixed(1)}</td><td>${detectionTiming.frustration.minDetectionTime.toFixed(1)}</td></tr>
+                    <tr><td>Maximum Time</td><td>${detectionTiming.fatigue.maxDetectionTime.toFixed(1)}</td><td>${detectionTiming.frustration.maxDetectionTime.toFixed(1)}</td></tr>
+                </table>
+            `;
+        }
+        
+        // Create charts
+        function createCharts() {
+            // Eye Metrics Chart
+            const metricsCtx = document.getElementById('metricsChart').getContext('2d');
+            new Chart(metricsCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['PERCLOS', 'Blink Rate', 'Pupil Size', 'Gaze Dispersion'],
+                    datasets: [
+                        {
+                            label: 'Neutral',
+                            data: [
+                                parseFloat(stats.neutral.perclos.mean),
+                                parseFloat(stats.neutral.blinkRate.mean),
+                                parseFloat(stats.neutral.pupilSize.mean),
+                                parseFloat(stats.neutral.gazeDispersion.mean)
+                            ],
+                            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                            borderColor: 'rgba(52, 152, 219, 1)',
+                            pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(52, 152, 219, 1)'
+                        },
+                        {
+                            label: 'Fatigue',
+                            data: [
+                                parseFloat(stats.fatigue.perclos.mean),
+                                parseFloat(stats.fatigue.blinkRate.mean),
+                                parseFloat(stats.fatigue.pupilSize.mean),
+                                parseFloat(stats.fatigue.gazeDispersion.mean)
+                            ],
+                            backgroundColor: 'rgba(243, 156, 18, 0.2)',
+                            borderColor: 'rgba(243, 156, 18, 1)',
+                            pointBackgroundColor: 'rgba(243, 156, 18, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(243, 156, 18, 1)'
+                        },
+                        {
+                            label: 'Frustration',
+                            data: [
+                                parseFloat(stats.frustration.perclos.mean),
+                                parseFloat(stats.frustration.blinkRate.mean),
+                                parseFloat(stats.frustration.pupilSize.mean),
+                                parseFloat(stats.frustration.gazeDispersion.mean)
+                            ],
+                            backgroundColor: 'rgba(231, 76, 60, 0.2)',
+                            borderColor: 'rgba(231, 76, 60, 1)',
+                            pointBackgroundColor: 'rgba(231, 76, 60, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(231, 76, 60, 1)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0
+                        }
+                    }
+                }
+            });
+            
+            // Feature Importance Chart
+            const featureCtx = document.getElementById('featureImportanceChart').getContext('2d');
+            const fatigueFeatures = Object.keys(featureImportance.fatigue);
+            
+            new Chart(featureCtx, {
+                type: 'bar',
+                data: {
+                    labels: fatigueFeatures,
+                    datasets: [
+                        {
+                            label: 'Fatigue',
+                            data: fatigueFeatures.map(feature => featureImportance.fatigue[feature]),
+                            backgroundColor: 'rgba(243, 156, 18, 0.7)'
+                        },
+                        {
+                            label: 'Frustration',
+                            data: fatigueFeatures.map(feature => featureImportance.frustration[feature] || 0),
+                            backgroundColor: 'rgba(231, 76, 60, 0.7)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Feature Importance by Cognitive State'
+                        }
+                    }
+                }
+            });
+            
+            // Classification Performance Chart
+            const classificationCtx = document.getElementById('classificationChart').getContext('2d');
+            new Chart(classificationCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['AUC', 'Accuracy', 'Precision', 'Recall', 'F1 Score'],
+                    datasets: [
+                        {
+                            label: 'Fatigue',
+                            data: [
+                                classificationResults.fatigue.auc,
+                                classificationResults.fatigue.accuracy,
+                                classificationResults.fatigue.precision,
+                                classificationResults.fatigue.recall,
+                                classificationResults.fatigue.f1Score
+                            ],
+                            backgroundColor: 'rgba(243, 156, 18, 0.7)'
+                        },
+                        {
+                            label: 'Frustration',
+                            data: [
+                                classificationResults.frustration.auc,
+                                classificationResults.frustration.accuracy,
+                                classificationResults.frustration.precision,
+                                classificationResults.frustration.recall,
+                                classificationResults.frustration.f1Score
+                            ],
+                            backgroundColor: 'rgba(231, 76, 60, 0.7)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 1.0
+                        }
+                    }
+                }
+            });
+            
+            // Intervention Effectiveness Chart
+            const interventionCtx = document.getElementById('interventionChart').getContext('2d');
+            
+            // Prepare data for intervention chart
+            const fatigueInterventions = Object.keys(interventionResults.fatigue);
+            const frustrationInterventions = Object.keys(interventionResults.frustration);
+            
+            new Chart(interventionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Adoption Rate', 'Effectiveness (1-5)', 'Productivity Improvement'],
+                    datasets: [
+                        {
+                            label: 'Break Suggestions',
+                            data: [
+                                interventionResults.fatigue['Break Suggestions'].adoptionRate,
+                                interventionResults.fatigue['Break Suggestions'].effectivenessRating / 5, // Normalize to 0-1
+                                interventionResults.fatigue['Break Suggestions'].productivityImprovement
+                            ],
+                            backgroundColor: 'rgba(243, 156, 18, 0.7)'
+                        },
+                        {
+                            label: 'Enhanced Error Messages',
+                            data: [
+                                interventionResults.frustration['Enhanced Error Messages'].adoptionRate,
+                                interventionResults.frustration['Enhanced Error Messages'].effectivenessRating / 5, // Normalize to 0-1
+                                interventionResults.frustration['Enhanced Error Messages'].productivityImprovement
+                            ],
+                            backgroundColor: 'rgba(231, 76, 60, 0.7)'
+                        },
+                        {
+                            label: 'Documentation Suggestions',
+                            data: [
+                                interventionResults.frustration['Documentation Suggestions'].adoptionRate,
+                                interventionResults.frustration['Documentation Suggestions'].effectivenessRating / 5, // Normalize to 0-1
+                                interventionResults.frustration['Documentation Suggestions'].productivityImprovement
+                            ],
+                            backgroundColor: 'rgba(155, 89, 182, 0.7)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 1.0
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Initialize on page load
+        window.onload = function() {
+            displayStats();
+            createCharts();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "participant_id": "test_participant",
+  "task_id": "test_task",
+  "start_time": "2025-05-26T19:43:09.433001",
+  "end_time": "2025-05-26T19:43:09.459856",
+  "features": [
+    {
+      "timestamp": "2025-05-26T19:43:09.433033",
+      "elapsed_seconds": 3.2e-05,
+      "perclos": 0.1349439884164765,
+      "blink_rate": 20.667052190239126,
+      "blink_duration": 0.31156131903244144,
+      "pupil_diameter": 0.5618636272714657,
+      "pupil_variance": 0.02074478077813091,
+      "gaze_scanpath_area": 0.22541698905539134,
+      "avg_fixation_duration": 0.3475233303365738,
+      "saccade_amplitude": 3.9153251212375006
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "reports": [
+    {
+      "timestamp": "2025-05-26T20:03:09.460022",
+      "fatigue": 3,
+      "frustration": 4,
+      "notes": "Self-report at 20 minutes",
+      "type": "periodic",
+      "minutes_elapsed": 20,
+      "participant_id": "test_participant",
+      "task_id": "test_task",
+      "is_fatigued": 0,
+      "is_frustrated": 0,
+      "system_fatigue_detection": 1,
+      "system_frustration_detection": 0,
+      "fatigue_agreement": 0,
+      "frustration_agreement": 1
+    },
+    {
+      "timestamp": "2025-05-26T20:23:09.460042",
+      "fatigue": 5,
+      "frustration": 7,
+      "notes": "Self-report at 40 minutes",
+      "type": "periodic",
+      "minutes_elapsed": 40,
+      "participant_id": "test_participant",
+      "task_id": "test_task",
+      "is_fatigued": 1,
+      "is_frustrated": 1,
+      "system_fatigue_detection": 1,
+      "system_frustration_detection": 1,
+      "fatigue_agreement": 1,
+      "frustration_agreement": 1
+    },
+    {
+      "timestamp": "2025-05-26T20:43:09.460055",
+      "fatigue": 4,
+      "frustration": 2,
+      "notes": "Self-report at 60 minutes",
+      "type": "periodic",
+      "minutes_elapsed": 60,
+      "participant_id": "test_participant",
+      "task_id": "test_task",
+      "is_fatigued": 1,
+      "is_frustrated": 0,
+      "system_fatigue_detection": 1,
+      "system_frustration_detection": 0,
+      "fatigue_agreement": 1,
+      "frustration_agreement": 1
+    },
+    {
+      "timestamp": "2025-05-26T21:03:09.460066",
+      "fatigue": 7,
+      "frustration": 3,
+      "notes": "Self-report at 80 minutes",
+      "type": "periodic",
+      "minutes_elapsed": 80,
+      "participant_id": "test_participant",
+      "task_id": "test_task",
+      "is_fatigued": 1,
+      "is_frustrated": 0,
+      "system_fatigue_detection": 1,
+      "system_frustration_detection": 0,
+      "fatigue_agreement": 1,
+      "frustration_agreement": 1
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+timestamp,fatigue,frustration,notes,type,minutes_elapsed,participant_id,task_id,is_fatigued,is_frustrated,window_predictions_count,system_avg_fatigue_prob,system_avg_frustration_prob,system_fatigue_detection,system_frustration_detection,system_state_counts,fatigue_agreement,frustration_agreement
+2025-05-26T19:43:09.433044,3,2,Test self-report,periodic,0,test_participant,test_task,0,0,1,0.6423449411051518,0.4469754375848,1,0,{'fatigue': 1},0,1

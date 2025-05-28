@@ -1,0 +1,145 @@
+{
+  "participant_id": "test_participant",
+  "task_id": "test_task",
+  "start_time": "2025-05-26T19:43:09.460000",
+  "end_time": "2025-05-26T20:43:09.460001",
+  "window_size_seconds": 5,
+  "predictions": [
+    {
+      "timestamp": "2025-05-26T19:43:09.460004",
+      "elapsed_seconds": 0,
+      "fatigue_probability": 0.8196586895220273,
+      "frustration_probability": 0.400057852097458,
+      "detected_state": "fatigue"
+    },
+    {
+      "timestamp": "2025-05-26T19:53:09.460015",
+      "elapsed_seconds": 600,
+      "fatigue_probability": 0.5972783609647487,
+      "frustration_probability": 0.7300533682595363,
+      "detected_state": "frustration"
+    },
+    {
+      "timestamp": "2025-05-26T20:03:09.460022",
+      "elapsed_seconds": 1200,
+      "fatigue_probability": 0.9829108310958417,
+      "frustration_probability": 0.2594565866343136,
+      "detected_state": "fatigue"
+    },
+    {
+      "timestamp": "2025-05-26T20:13:09.460037",
+      "elapsed_seconds": 1800,
+      "fatigue_probability": 0.34991115760468655,
+      "frustration_probability": 0.548389211737657,
+      "detected_state": "neutral"
+    },
+    {
+      "timestamp": "2025-05-26T20:23:09.460042",
+      "elapsed_seconds": 2400,
+      "fatigue_probability": 0.85070977176816,
+      "frustration_probability": 0.6066623722635633,
+      "detected_state": "fatigue"
+    },
+    {
+      "timestamp": "2025-05-26T20:33:09.460050",
+      "elapsed_seconds": 3000,
+      "fatigue_probability": 0.9611041143990473,
+      "frustration_probability": 0.4761652847755055,
+      "detected_state": "fatigue"
+    },
+    {
+      "timestamp": "2025-05-26T20:43:09.460055",
+      "elapsed_seconds": 3600,
+      "fatigue_probability": 0.5730117065122748,
+      "frustration_probability": 0.43526046712039307,
+      "detected_state": "neutral"
+    },
+    {
+      "timestamp": "2025-05-26T20:53:09.460061",
+      "elapsed_seconds": 4200,
+      "fatigue_probability": 1.0,
+      "frustration_probability": 0.7328558229663431,
+      "detected_state": "fatigue"
+    },
+    {
+      "timestamp": "2025-05-26T21:03:09.460066",
+      "elapsed_seconds": 4800,
+      "fatigue_probability": 1.0,
+      "frustration_probability": 0.42700436726014307,
+      "detected_state": "fatigue"
+    },
+    {
+      "timestamp": "2025-05-26T21:13:09.460072",
+      "elapsed_seconds": 5400,
+      "fatigue_probability": 0.9494904490880072,
+      "frustration_probability": 0.5431428221663333,
+      "detected_state": "fatigue"
+    }
+  ],
+  "self_reports": [
+    {
+      "timestamp": "2025-05-26T20:03:09.460022",
+      "fatigue": 3,
+      "frustration": 4,
+      "notes": "Self-report at 20 minutes",
+      "type": "periodic",
+      "minutes_elapsed": 20,
+      "participant_id": "test_participant",
+      "task_id": "test_task",
+      "is_fatigued": 0,
+      "is_frustrated": 0,
+      "system_fatigue_detection": 1,
+      "system_frustration_detection": 0,
+      "fatigue_agreement": 0,
+      "frustration_agreement": 1
+    },
+    {
+      "timestamp": "2025-05-26T20:23:09.460042",
+      "fatigue": 5,
+      "frustration": 7,
+      "notes": "Self-report at 40 minutes",
+      "type": "periodic",
+      "minutes_elapsed": 40,
+      "participant_id": "test_participant",
+      "task_id": "test_task",
+      "is_fatigued": 1,
+      "is_frustrated": 1,
+      "system_fatigue_detection": 1,
+      "system_frustration_detection": 1,
+      "fatigue_agreement": 1,
+      "frustration_agreement": 1
+    },
+    {
+      "timestamp": "2025-05-26T20:43:09.460055",
+      "fatigue": 4,
+      "frustration": 2,
+      "notes": "Self-report at 60 minutes",
+      "type": "periodic",
+      "minutes_elapsed": 60,
+      "participant_id": "test_participant",
+      "task_id": "test_task",
+      "is_fatigued": 1,
+      "is_frustrated": 0,
+      "system_fatigue_detection": 1,
+      "system_frustration_detection": 0,
+      "fatigue_agreement": 1,
+      "frustration_agreement": 1
+    },
+    {
+      "timestamp": "2025-05-26T21:03:09.460066",
+      "fatigue": 7,
+      "frustration": 3,
+      "notes": "Self-report at 80 minutes",
+      "type": "periodic",
+      "minutes_elapsed": 80,
+      "participant_id": "test_participant",
+      "task_id": "test_task",
+      "is_fatigued": 1,
+      "is_frustrated": 0,
+      "system_fatigue_detection": 1,
+      "system_frustration_detection": 0,
+      "fatigue_agreement": 1,
+      "frustration_agreement": 1
+    }
+  ]
+}

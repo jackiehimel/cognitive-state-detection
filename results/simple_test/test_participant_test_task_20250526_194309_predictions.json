@@ -1,0 +1,40 @@
+{
+  "participant_id": "test_participant",
+  "task_id": "test_task",
+  "start_time": "2025-05-26T19:43:09.433001",
+  "end_time": "2025-05-26T19:43:09.459706",
+  "window_size_seconds": 5,
+  "predictions": [
+    {
+      "timestamp": "2025-05-26T19:43:09.433040",
+      "elapsed_seconds": 3.9e-05,
+      "fatigue_probability": 0.6423449411051518,
+      "frustration_probability": 0.4469754375848,
+      "detected_state": "fatigue"
+    }
+  ],
+  "self_reports": [
+    {
+      "timestamp": "2025-05-26T19:43:09.433044",
+      "fatigue": 3,
+      "frustration": 2,
+      "notes": "Test self-report",
+      "type": "periodic",
+      "minutes_elapsed": 0,
+      "participant_id": "test_participant",
+      "task_id": "test_task",
+      "is_fatigued": 0,
+      "is_frustrated": 0,
+      "window_predictions_count": 1,
+      "system_avg_fatigue_prob": 0.6423449411051518,
+      "system_avg_frustration_prob": 0.4469754375848,
+      "system_fatigue_detection": 1,
+      "system_frustration_detection": 0,
+      "system_state_counts": {
+        "fatigue": 1
+      },
+      "fatigue_agreement": 0,
+      "frustration_agreement": 1
+    }
+  ]
+}
